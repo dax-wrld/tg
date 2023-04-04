@@ -44,12 +44,12 @@ class ChatGPTTelegramBot:
         self.config = config
         self.openai = openai
         self.commands = [
-            BotCommand(command='help', description='Show help message'),
-            BotCommand(command='reset', description='Reset the conversation. Optionally pass high-level instructions '
-                                                    '(e.g. /reset You are a helpful assistant)'),
-            BotCommand(command='image', description='Generate image from prompt (e.g. /image cat)'),
-            BotCommand(command='stats', description='Get your current usage statistics'),
-            BotCommand(command='resend', description='Resend the latest message')
+            BotCommand(command='help', description='Справка по командам'),
+            BotCommand(command='reset', description='Сброс текущего разговора\nПо желанию можно сразу указать роль ассистента для нового разговора'
+                                                    '\n(Например: /reset Ты - профессиональный копирайтер)'),
+           #BotCommand(command='image', description='Generate image from prompt (e.g. /image cat)'),
+            BotCommand(command='stats', description='Статистика использования'),
+            BotCommand(command='resend', description='Повторная отправка последнего запроса')
         ]
         self.disallowed_message = "Sorry, you are not allowed to use this bot. You can check out the source code at " \
                                   "https://github.com/n3d1117/chatgpt-telegram-bot"
@@ -62,13 +62,14 @@ class ChatGPTTelegramBot:
         Shows the help menu.
         """
         commands = [f'/{command.command} - {command.description}' for command in self.commands]
-        help_text = 'I\'m a ChatGPT bot, talk to me!' + \
+        help_text = 'Я умный ChatGPT бот, поговори со мной! 🤩' + \
                     '\n\n' + \
                     '\n'.join(commands) + \
                     '\n\n' + \
-                    'Send me a voice message or file and I\'ll transcribe it for you!' + \
+                    'Вы также можете отправите мне голосовое сообщение! 🗣' + \
                     '\n\n' + \
-                    "Open source at https://github.com/n3d1117/chatgpt-telegram-bot"
+                    'Новости из мира нейросетей, а также масса полезного контента на Телеграм-канале:' +\
+                    '\nhttps://t.me/kurilov_neiro'
         await update.message.reply_text(help_text, disable_web_page_preview=True)
 
 
